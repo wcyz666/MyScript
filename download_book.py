@@ -32,8 +32,10 @@ class ConsumerThread(threading.Thread):
                 print "Task finished"
 
 Books = {
-    u"全部": 123850,
-
+    u"美术": {
+        "start":149225,
+        "end":149347
+    }
 }
 
 queue = Queue.Queue(100)
@@ -43,16 +45,20 @@ for i in range(num_worker_threads):
      t.start()
 
 
-for (dir, start) in Books.items():
-
-    os.mkdir(dir)
-    while True:
+for (dir, interval) in Books.items():
+    start = interval['start']
+    end = interval['end']
+    try:
+        os.mkdir(dir)
+    except WindowsError:
+        pass
+    while start <= end:
         try:
             queue.put((str(start), dir), timeout=30)
             start += 1
         except:
             break
-
+    queue.join()
     queue.empty()
     is_done = False
     print dir + " is done!"
