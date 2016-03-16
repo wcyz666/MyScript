@@ -1,6 +1,7 @@
 import urllib2, urllib, cookielib, time, json
 from myInfo import my_cmu_id, my_cmu_pass
 from bs4 import BeautifulSoup
+import query_config
 from query_config import query_param, current
 
 cookie = cookielib.CookieJar()
@@ -94,7 +95,7 @@ count = 0
 
 
 while True:
-    reload(query_param)
+    reload(query_config)
     config = query_param[current]
     req = urllib2.Request(url=Submit_Url, data=urllib.urlencode(config))
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))

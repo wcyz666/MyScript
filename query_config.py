@@ -1,6 +1,6 @@
 __author__ = 'ASUA'
 
-DNS = 'ELB-345778789.us-east-1.elb.amazonaws.com'
+DNS = ''
 duration = 180
 current = "q1"
 
