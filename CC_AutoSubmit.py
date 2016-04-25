@@ -101,10 +101,10 @@ while True:
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
     response = opener.open(req)
     page = response.read()
+
     if " Submitted successfully" in page:
 
         count += 1
         print current + " Submitted successfully, #" + str(count) + " submission, at " + time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
         print " Last RPS: " + get_last_rps(config['page'], config['task'])
-
-    time.sleep(10)
+    time.sleep(5)
