@@ -44,7 +44,7 @@ text = soup.find('div', {
 if prev_text != text:
     with open("/home/ubuntu/prev_text", "wr") as fp:
         fp.write(text)
-    subprocess.call('echo -e "%s" | mail -s "[OPT] OPT status HAS'
+    subprocess.call('echo "%s" | mail -s "[OPT] OPT status HAS'
                     ' CHANGED!" cheng.wang@sv.cmu.edu' % (text, ), shell=True)
 
 
