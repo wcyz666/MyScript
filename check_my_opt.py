@@ -1,6 +1,11 @@
 import urllib2, urllib, cookielib, time, json
 from myInfo import my_opt_receipt
 from bs4 import BeautifulSoup
+import subprocess
+
+with open("/home/ubuntu/prev_text", "rb") as fp:
+    prev_text = fp.read()
+
 
 cookie = cookielib.CookieJar()
 OPT_Url = "https://egov.uscis.gov/casestatus/landing.do"
@@ -36,4 +41,10 @@ text = soup.find('div', {
     "class": "rows text-center"
 }).find("p").text
 
-print text
+if prev_text != text:
+    with open("/home/ubuntu/prev_text", "wr") as fp:
+        fp.write(text)
+    subprocess.call('echo -e "%s" | mail -s "[OPT] OPT status HAS'
+                    ' CHANGED!" cheng.wang@sv.cmu.edu' % (text, ), shell=True)
+
+
